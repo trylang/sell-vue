@@ -1,1 +1,2 @@
 1.在common/stylus的index中，使用import引入为啥必须用@？
+2.在main.js中，必须使用import来导入，不能用require，否则vue-resource加载不到我们想要的方法。

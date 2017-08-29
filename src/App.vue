@@ -28,13 +28,12 @@ export default {
     }
   },
   created() {
-    console.log(Vue)
-    console.log(Vue.$http)
-    Vue.$http.get('/api/seller').then((response) => {
+    this.$http.get('/api/seller').then((response) => {
       response = response.body
       console.log(response)
       if (response.code === ERR_OK) {
         this.seller = Object.assign({}, this.seller, response.data)
+        console.log(this.seller)
       }
     })
   },
