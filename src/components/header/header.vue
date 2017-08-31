@@ -216,13 +216,11 @@ export default {
       left:0
       width:100%
       height:100%
-      transition:all 0.5s
-      &.fade-enter-active, .fade-leave-active
-        opcity:1
-        background:rgba(7,17,27,0.8)
-      &.fade-enter, &.fade-leave-to
-        opcity:0
-        background:rgba(7,17,27,0)
+      background:rgba(7,17,27,0.8)
+      &.fade-enter-active,&.fade-leave-active
+        transition:opacity 0.5s
+      &.fade-enter,&.fade-leave-to
+        opacity:0
       .detail-wrapper
         width:100%
         min-height:100%
