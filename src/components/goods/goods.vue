@@ -34,12 +34,13 @@
         </li>
       </ul>
     </div>
-    <div class="cart"></div>
+    <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll'
+import shopcart from '../shopcart/shopcart'
 const ERR_OK = 0
 export default {
   props: {
@@ -53,6 +54,20 @@ export default {
       listHeight: [],
       scrollY: 0,
       selectedFood: {}
+    }
+  },
+  computed: {
+    selectFoods() {
+      let foods = []
+      this.goods.forEach((good) => {
+        good.foods.forEach((food) => {
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      console.log(foods)
+      return foods
     }
   },
   created() {
@@ -72,6 +87,9 @@ export default {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {})
     }
+  },
+  components: {
+    shopcart
   }
 }
 </script>
@@ -84,6 +102,7 @@ export default {
     top:174px
     bottom:46px
     width: 100%
+    padding-bottom:56px
     overflow:hidden
     .menu-wrapper
       flex:0 0 80px
