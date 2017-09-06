@@ -15,6 +15,8 @@
           <div class="pay" :class="payClass">{{payDesc}}</div>
         </div>
       </div>
+      <div class="shopcart-list">
+      </div>
     </div>
   </template>
   <script type="text/ecmascript-6">

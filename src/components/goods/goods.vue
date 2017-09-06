@@ -12,7 +12,7 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods" class="food-list food-list-hook">
+        <li @click="selectFood(food,$event)" v-for="item in goods" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item">
@@ -28,8 +28,10 @@
                 <div class="price">
                 <span class="now">￥{{food.price}}</span><span class="old"v-show="food.oldPrice">￥{{food.oldPrice}}</span>
               </div>
+               <div class="cartcontrol-wrapper">
+                <cartcontrol :food="food"></cartcontrol>
               </div>
-              <div class="cartcontrol-wrapper"></div>
+              </div>
             </li>
           </ul>
         </li>
@@ -42,6 +44,7 @@
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll'
 import shopcart from '../shopcart/shopcart'
+import cartcontrol from '../cartcontrol/cartcontrol'
 const ERR_OK = 0
 export default {
   props: {
@@ -94,6 +97,12 @@ export default {
     })
   },
   methods: {
+    selectFood(food, event) {
+      if (!event._constructed) {
+        return
+      }
+      this.$refs.food.show()
+    },
     _initScroll() {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {})
@@ -113,7 +122,8 @@ export default {
     }
   },
   components: {
-    shopcart
+    shopcart,
+    cartcontrol
   }
 }
 </script>
@@ -216,5 +226,9 @@ export default {
               font-size:10px
               text-decoration: line-through
               color: rgb(147, 153, 159)
+          .cartcontrol-wrapper
+            position:absolute
+            bottom:12px
+            right:0
 
 </style>
